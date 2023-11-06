@@ -7,10 +7,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import webkit.welfare.domain.UserEntity;
+import webkit.welfare.dto.AddUserRequest;
 import webkit.welfare.dto.ResponseDTO;
 import webkit.welfare.dto.UserDTO;
 import webkit.welfare.security.TokenProvider;
 import webkit.welfare.service.UserService;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("auth")
@@ -77,7 +80,7 @@ public class UserController {
 
     // 회원가입
     @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@RequestBody UserDTO userDTO) {
+    public ResponseEntity<?> registerUser(@RequestBody @Valid AddUserRequest userDTO) {
         try{
             // 받아온 DTO로 UserEntity 생성
             UserEntity user = UserEntity.builder()
