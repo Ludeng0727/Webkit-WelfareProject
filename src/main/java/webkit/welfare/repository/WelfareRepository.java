@@ -1,2 +1,4 @@
-package webkit.welfare.repository;public interface WelfareRepository {
+package webkit.welfare.repository;
+
+public interface WelfareRepository {
 }

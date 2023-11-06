@@ -1,2 +1,4 @@
-package webkit.welfare.domain;public class WelfareEntity {
+package webkit.welfare.domain;
+
+public class WelfareEntity {
 }

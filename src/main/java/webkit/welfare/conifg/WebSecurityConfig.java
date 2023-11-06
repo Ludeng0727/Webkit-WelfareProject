@@ -1,2 +1,4 @@
-package webkit.welfare.conifg;public class WebSecurityConfig {
+package webkit.welfare.conifg;
+
+public class WebSecurityConfig {
 }
