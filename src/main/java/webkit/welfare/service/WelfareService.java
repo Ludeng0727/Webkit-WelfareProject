@@ -1,2 +1,4 @@
-package webkit.welfare.service;public class WelfareService {
+package webkit.welfare.service;
+
+public class WelfareService {
 }

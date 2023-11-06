@@ -1,2 +1,4 @@
-package webkit.welfare.dto;public class WelfareDTO {
+package webkit.welfare.dto;
+
+public class WelfareDTO {
 }

@@ -1,2 +1,4 @@
-package webkit.welfare.controller;public class WelfareController {
+package webkit.welfare.controller;
+
+public class WelfareController {
 }
