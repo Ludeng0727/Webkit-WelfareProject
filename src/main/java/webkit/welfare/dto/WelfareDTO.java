@@ -4,14 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class WelfareDTO {
-    private String lifeArray; //생애주기
+    private Date birth; //생년월일 -> 이용해서 생애주기 계산
     private String trgterIndvdlArray; //가구상황
-    private String intrsThemaArray; //관심주제
-    private String age; //나이
     private String ctpvNm; //시도명
     private String sggNm; //시군구명
     private String srchKeyCode; //검색분류
