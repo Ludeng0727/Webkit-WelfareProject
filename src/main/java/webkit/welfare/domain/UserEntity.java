@@ -24,7 +24,9 @@ public class UserEntity {
     private String id;
 
     private String username;
+
     private String email;
+
     private String password;
     // 시도명
     private String ctpvNm;
