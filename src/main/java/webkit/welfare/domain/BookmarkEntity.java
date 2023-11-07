@@ -26,8 +26,11 @@ public class BookmarkEntity {
     @JsonBackReference
     private UserEntity user;
 
-//    @ManyToOne
-//    @JoinColumn(columnDefinition = "welfare_id")
-//    @JsonBackReference
-//    private WelfareEntity welfare;
+    @ManyToOne
+    @JoinColumn(columnDefinition = "welfare_id")
+    @JsonBackReference
+    private WelfareEntity welfare;
+
+    private String serviceName;
+    private Boolean isValid;
 }

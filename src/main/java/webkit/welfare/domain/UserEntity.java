@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -32,6 +33,12 @@ public class UserEntity {
     private String ctpvNm;
     // 시군구명
     private String sggNm;
+
+    private Date birth;
+
+    private FamilySituationEnum familySituation;
+
+    private LifeCycleEnum lifeCycle;
 
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
     @JsonManagedReference
