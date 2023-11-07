@@ -65,8 +65,8 @@ public class UserController {
             // 유저 정보 검색 및 회원 정보 변경
             UserEntity user = userService.findById(userId);
             user.setUsername(userDTO.getUsername());
-            userDTO.setCtpvNm(userDTO.getCtpvNm());
-            userDTO.setSggNm(userDTO.getSggNm());
+            user.setCtpvNm(userDTO.getCtpvNm());
+            user.setSggNm(userDTO.getSggNm());
 
             userService.updateUser(user);
 
@@ -86,7 +86,7 @@ public class UserController {
             UserEntity user = UserEntity.builder()
                     .username(userDTO.getUsername())
                     .email(userDTO.getEmail())
-                    .password(userDTO.getPassword())
+                    .password(passwordEncoder.encode(userDTO.getPassword()))
                     .ctpvNm(userDTO.getCtpvNm())
                     .sggNm(userDTO.getSggNm())
                     .build();
