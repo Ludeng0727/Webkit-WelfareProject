@@ -1,19 +1,28 @@
 package webkit.welfare.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+@Data
 @Entity
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class WelfareEntity {
     @Id
-    @GeneratedValue(generator = "system-uuid")
-    @GenericGenerator(name = "system-uuid", strategy = "uuid")
-    private String servId;
+    private String servId; //서비스ID
+    private String bizChrDeptNm; //사업담당부서명
     private String ctpvNm; //시도명
     private String sggNm; //시군구명
+    @Column(length = 1000)
     private String servDgst; //서비스요약
     private String servDtlLink; //서비스 상세 링크
     private String lifeNmArray; //생애주기명
