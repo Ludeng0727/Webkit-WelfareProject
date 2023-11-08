@@ -16,7 +16,4 @@ public class WelfareDTO {
     private FamilySituationEnum familySituation; //가구상황
     private String ctpvNm; //시도명
     private String sggNm; //시군구명
-    private String srchKeyCode; //검색분류
-    private String searchWrd; //검색어
-    private String arrgOrd; //정렬순서
 }

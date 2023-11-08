@@ -5,8 +5,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import webkit.welfare.domain.LifeCycleEnum;
+import webkit.welfare.domain.UserEntity;
+import webkit.welfare.domain.WelfareEntity;
+import webkit.welfare.dto.ResponseDTO;
 import webkit.welfare.dto.WelfareDTO;
 import webkit.welfare.service.WelfareService;
+
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -18,10 +24,17 @@ public class WelfareController {
     private final WelfareService welfareService;
 
 
-//    @GetMapping("all")
-//    public ResponseEntity<?> getAllWelfare(@ModelAttribute WelfareDTO welfareDTO){
-//
-//    }
+    @GetMapping("/all")
+    public ResponseEntity<?> getAllWelfare(@ModelAttribute WelfareDTO welfareDTO){
+        try{
+            List<WelfareEntity> allWelfare = welfareService.getAllWelfareByWelfareDTO(welfareDTO);
+            return ResponseEntity.ok(allWelfare);
+
+        } catch (Exception e){
+            ResponseDTO<Object> responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
+            return ResponseEntity.badRequest().body(responseDTO);
+        }
+    }
 
 
 
