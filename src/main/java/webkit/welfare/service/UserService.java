@@ -3,10 +3,13 @@ package webkit.welfare.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import webkit.welfare.domain.LifeCycleEnum;
 import webkit.welfare.domain.UserEntity;
 import webkit.welfare.repository.UserRepository;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.Calendar;
+import java.util.Date;
 
 @Service
 public class UserService {
@@ -26,6 +29,9 @@ public class UserService {
             throw new RuntimeException("Email already exists.");
         }
 
+        // 생년월일로 생애주기 할당
+        userEntity.setLifeCycle(AgeCalculate(userEntity));
+
         return userRepository.save(userEntity);
     }
 
@@ -36,7 +42,10 @@ public class UserService {
         if(!userRepository.existsById(userEntity.getId())) {
             throw new RuntimeException("Unknown ID");
         }
-        
+
+        // 생년월일로 생애 주기 할당
+        userEntity.setLifeCycle(AgeCalculate(userEntity));
+
         // 회원 정보 갱신
         userRepository.save(userEntity);
 
@@ -62,9 +71,41 @@ public class UserService {
 
     // 누락 항목 검사
     public Boolean validate(UserEntity userEntity) {
-        if(userEntity.getEmail() == null || userEntity.getPassword() == null || userEntity.getCtpvNm() == null || userEntity.getSggNm() == null) {
+        if(userEntity.getEmail() == null || userEntity.getPassword() == null
+                || userEntity.getCtpvNm() == null || userEntity.getSggNm() == null
+                || userEntity.getBirth() == null || userEntity.getFamilySituation() == null) {
             return false;
         }
         return true;
+    }
+
+    public LifeCycleEnum AgeCalculate(UserEntity userEntity) {
+        // 생년월일을 사용하여 만 나이 계산
+        Date currentDate = new Date();
+        Calendar birthCalendar = Calendar.getInstance();
+        birthCalendar.setTime(userEntity.getBirth());
+
+        Calendar currentCalendar = Calendar.getInstance();
+        currentCalendar.setTime(currentDate);
+
+        int age = currentCalendar.get(Calendar.YEAR) - birthCalendar.get(Calendar.YEAR);
+        if(currentCalendar.get(Calendar.DAY_OF_YEAR) < birthCalendar.get(Calendar.DAY_OF_YEAR)) {
+            age--;
+        }
+
+        // 계산된 만 나이로 생애 주기 판단
+        if(age>=6 && age<=12) {
+            return LifeCycleEnum.아동;
+        } else if(age>=13 && age<=18) {
+            return LifeCycleEnum.청소년;
+        } else if(age>=19 && age<=29) {
+            return LifeCycleEnum.청년;
+        } else if(age>=30 && age<=64) {
+            return LifeCycleEnum.중장년;
+        } else if(age>=65) {
+            return LifeCycleEnum.노년;
+        }
+
+        return null;
     }
 }

@@ -62,13 +62,18 @@ public class UserController {
     @PutMapping("/updateUser")
     public ResponseEntity<?> updateUser(@AuthenticationPrincipal String userId, @RequestBody UserDTO userDTO) {
         try{
-            // 유저 정보 검색 및 회원 정보 변경
-            UserEntity user = userService.findById(userId);
-            user.setUsername(userDTO.getUsername());
-            user.setCtpvNm(userDTO.getCtpvNm());
-            user.setSggNm(userDTO.getSggNm());
+            UserEntity user = UserDTO.toEntity(userDTO);
 
-            userService.updateUser(user);
+            // 유저 정보 검색 및 회원 정보 변경
+            UserEntity originalUser = userService.findById(userId);
+            originalUser.setUsername(userDTO.getUsername());
+            originalUser.setCtpvNm(userDTO.getCtpvNm());
+            originalUser.setSggNm(userDTO.getSggNm());
+            originalUser.setBirth(userDTO.getBirth());
+            originalUser.setFamilySituation(user.getFamilySituation());
+            originalUser.setLifeCycle(user.getLifeCycle());
+
+            userService.updateUser(originalUser);
 
             return ResponseEntity.ok().body(userService.findById(userId));
         } catch (Exception e){
@@ -82,17 +87,23 @@ public class UserController {
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@RequestBody @Valid AddUserRequest userDTO) {
         try{
+            UserDTO dto = AddUserRequest.toUserDTO(userDTO);
+            UserEntity user = UserDTO.toEntity(dto);
+            System.out.println(user);
             // 받아온 DTO로 UserEntity 생성
-            UserEntity user = UserEntity.builder()
-                    .username(userDTO.getUsername())
-                    .email(userDTO.getEmail())
-                    .password(passwordEncoder.encode(userDTO.getPassword()))
-                    .ctpvNm(userDTO.getCtpvNm())
-                    .sggNm(userDTO.getSggNm())
+            UserEntity newUser = UserEntity.builder()
+                    .username(user.getUsername())
+                    .email(user.getEmail())
+                    .password(passwordEncoder.encode(user.getPassword()))
+                    .ctpvNm(user.getCtpvNm())
+                    .sggNm(user.getSggNm())
+                    .birth(userDTO.getBirth())
+                    .lifeCycle(user.getLifeCycle())
+                    .familySituation(user.getFamilySituation())
                     .build();
 
             // DB에 저장 후 해당 회원 정보 가져오기
-            UserEntity registerUser = userService.addUser(user);
+            UserEntity registerUser = userService.addUser(newUser);
 
             UserDTO responseUserDTO = UserDTO.builder()
                     .id(registerUser.getId())
@@ -101,6 +112,9 @@ public class UserController {
                     .password(registerUser.getPassword())
                     .ctpvNm(registerUser.getCtpvNm())
                     .sggNm(registerUser.getSggNm())
+                    .birth(registerUser.getBirth())
+                    .lifeCycle(registerUser.getLifeCycle().name())
+                    .familySituation(registerUser.getFamilySituation().name())
                     .build();
 
             return ResponseEntity.ok().body(responseUserDTO);
