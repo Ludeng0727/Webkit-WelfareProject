@@ -2,7 +2,6 @@ package webkit.welfare.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -11,7 +10,6 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import webkit.welfare.domain.WelfareEntity;
 import webkit.welfare.dto.ResponseDTO;
-import webkit.welfare.dto.WelfareDTO;
 import webkit.welfare.service.WelfareService;
 
 import java.util.List;
