@@ -3,6 +3,7 @@ package webkit.welfare.dto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
+import webkit.welfare.domain.FamilySituationEnum;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -42,7 +43,7 @@ public class AddUserRequest {
 
     @ApiModelProperty(notes = "가구상황")
     @NotBlank
-    private final String familySituation;
+    private final FamilySituationEnum familySituation;
 
     public static UserDTO toUserDTO(final AddUserRequest dto) {
         UserDTO userDTO = UserDTO.builder()
