@@ -16,7 +16,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import webkit.welfare.domain.BookmarkEntity;
 import webkit.welfare.domain.WelfareEntity;
+import webkit.welfare.repository.BookmarkRepository;
+import webkit.welfare.repository.WelfareRepository;
 import webkit.welfare.service.WelfareService;
 
 import java.net.URI;
@@ -29,15 +32,17 @@ import java.util.List;
 @PropertySource("classpath:application-api-key.properties")
 public class WelfareScheduler {
 
-    private final String BASE_URL = "https://apis.data.go.kr/B554287/LocalGovernmentWelfareInformations";
-    private final String API_PATH = "/LcgvWelfarelist";
     @Value("${public_data_api_key}")
     private String API_KEY;
-    private final String NUM_OF_ROWS = "&numOfRows=99999";
-    private final WelfareService welfareService;
+    private final WelfareRepository welfareRepository;
+    private final BookmarkRepository bookmarkRepository;
 
     @Scheduled(cron = "0 0 4 * * *")
     public void updateWelfare() throws URISyntaxException, JsonProcessingException {
+        String BASE_URL = "https://apis.data.go.kr/B554287/LocalGovernmentWelfareInformations";
+        String API_PATH = "/LcgvWelfarelist";
+        String NUM_OF_ROWS = "&numOfRows=99999";
+
         URI uri = new URI(BASE_URL + API_PATH + API_KEY + NUM_OF_ROWS);
 
         RestTemplate restTemplate = new RestTemplate();
@@ -48,16 +53,23 @@ public class WelfareScheduler {
         ObjectMapper mapper = new ObjectMapper();
         JsonNode node = mapper.readTree(json);
 
-        String resultCode = node.get("resultCode").asText();
-        String resultMessage = node.get("resultMessage").asText();
-        String numOfRows = node.get("numOfRows").asText();
-        String pageNo = node.get("pageNo").asText();
-        String totalCount = node.get("totalCount").asText();
+//        String resultCode = node.get("resultCode").asText();
+//        String resultMessage = node.get("resultMessage").asText();
+//        String numOfRows = node.get("numOfRows").asText();
+//        String pageNo = node.get("pageNo").asText();
+//        String totalCount = node.get("totalCount").asText();
         JsonNode nodes = node.get("servList");
         ArrayNode servList = (ArrayNode) nodes;
 
         List<WelfareEntity> welfareList = mapper.convertValue(servList, new TypeReference<List<WelfareEntity>>() {});
-        welfareService.saveAllWelfareList(welfareList);
-
+        welfareRepository.saveAll(welfareList);
     }
+
+//    @Scheduled(cron = "0 30 4 * * *")
+//    public void updateBookmark(){
+//        List<BookmarkEntity> bookmarkList = bookmarkRepository.findAll();
+//
+//
+//
+//    }
 }
