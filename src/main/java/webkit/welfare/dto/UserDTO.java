@@ -35,38 +35,21 @@ public class UserDTO {
     @ApiModelProperty(notes = "생년월일")
     private Date birth;
     @ApiModelProperty(notes = "생애주기")
-    private String lifeCycle;
+    private LifeCycleEnum lifeCycle;
     @ApiModelProperty(notes = "가구상황")
-    private String familySituation;
+    private FamilySituationEnum familySituation;
 
     public static UserEntity toEntity(final UserDTO dto) {
-        UserDTO parseredDTO = parserFamilySituation(dto);
         UserEntity entity = new UserEntity();
-        entity.setUsername(parseredDTO.getUsername());
-        entity.setEmail(parseredDTO.getEmail());
-        entity.setPassword(parseredDTO.getPassword());
-        entity.setCtpvNm(parseredDTO.getCtpvNm());
-        entity.setSggNm(parseredDTO.getSggNm());
-        entity.setBirth(parseredDTO.getBirth());
-        entity.setFamilySituation(FamilySituationEnum.valueOf(parseredDTO.getFamilySituation()));
-
-        if(parseredDTO.getLifeCycle() == null) {
-            entity.setLifeCycle(null);
-        } else {
-            entity.setLifeCycle(LifeCycleEnum.valueOf(parseredDTO.getLifeCycle()));
-        }
+        entity.setUsername(dto.getUsername());
+        entity.setEmail(dto.getEmail());
+        entity.setPassword(dto.getPassword());
+        entity.setCtpvNm(dto.getCtpvNm());
+        entity.setSggNm(dto.getSggNm());
+        entity.setBirth(dto.getBirth());
+        entity.setLifeCycle(dto.getLifeCycle());
+        entity.setFamilySituation(dto.getFamilySituation());
 
         return entity;
-    }
-
-    public static UserDTO parserFamilySituation(final UserDTO dto) {
-        if(dto.getFamilySituation().equals("한부모·조손")) {
-            dto.setFamilySituation("한부모조손");
-        }
-        if(dto.getFamilySituation().equals("다문화·탈북민")) {
-            dto.setFamilySituation("다문화탈북민");
-        }
-
-        return dto;
     }
 }

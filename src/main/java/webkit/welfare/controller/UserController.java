@@ -120,8 +120,8 @@ public class UserController {
                     .ctpvNm(registerUser.getCtpvNm())
                     .sggNm(registerUser.getSggNm())
                     .birth(registerUser.getBirth())
-                    .lifeCycle(registerUser.getLifeCycle().name())
-                    .familySituation(registerUser.getFamilySituation().name())
+                    .lifeCycle(registerUser.getLifeCycle())
+                    .familySituation(registerUser.getFamilySituation())
                     .build();
 
             return ResponseEntity.ok().body(responseUserDTO);
