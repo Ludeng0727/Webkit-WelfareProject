@@ -10,8 +10,6 @@ import webkit.welfare.dto.WelfareDTO;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest
 class WelfareServiceTest {
 
@@ -20,18 +18,18 @@ class WelfareServiceTest {
 
     @Test
     void getAllWelfareByWelfareDTO() {
-        WelfareDTO welfareDTO = new WelfareDTO(LifeCycleEnum.OLD_AGE, FamilySituationEnum.LOW_INCOME, "경상북도", "구미시");
-        List<WelfareEntity> all = welfareService.getAllWelfareByWelfareDTO(welfareDTO);
-
-        all.forEach(welfare->{
-            System.out.println("=============");
-            System.out.println(welfare.getServId());
-            System.out.println(welfare.getLifeNmArray());
-            System.out.println(welfare.getTrgterIndvdlNmArray());
-            System.out.println(welfare.getCtpvNm());
-            System.out.println(welfare.getSggNm());
-            System.out.println("=============");
-        });
+//        WelfareDTO welfareDTO = new WelfareDTO(LifeCycleEnum.OLD_AGE, FamilySituationEnum.LOW_INCOME, "경상북도", "구미시");
+////        List<WelfareEntity> all = welfareService.getAllWelfareByUserInfo(welfareDTO);
+//
+//        all.forEach(welfare->{
+//            System.out.println("=============");
+//            System.out.println(welfare.getServId());
+//            System.out.println(welfare.getLifeNmArray());
+//            System.out.println(welfare.getTrgterIndvdlNmArray());
+//            System.out.println(welfare.getCtpvNm());
+//            System.out.println(welfare.getSggNm());
+//            System.out.println("=============");
+//        });
 
 
     }

@@ -2,12 +2,12 @@ package webkit.welfare.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.resource.beans.container.spi.BeanLifecycleStrategy;
 import org.springframework.stereotype.Service;
 import webkit.welfare.domain.FamilySituationEnum;
 import webkit.welfare.domain.LifeCycleEnum;
+import webkit.welfare.domain.UserEntity;
 import webkit.welfare.domain.WelfareEntity;
-import webkit.welfare.dto.WelfareDTO;
+import webkit.welfare.repository.UserRepository;
 import webkit.welfare.repository.WelfareRepository;
 
 import java.util.ArrayList;
@@ -19,12 +19,15 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class WelfareService {
     private final WelfareRepository welfareRepository;
+    private final UserRepository userRepository;
 
-    public List<WelfareEntity> getAllWelfareByWelfareDTO(WelfareDTO welfareDTO){
-        LifeCycleEnum lifeCycle = welfareDTO.getLifeCycle();
-        FamilySituationEnum familySituation = welfareDTO.getFamilySituation();
-        String city = welfareDTO.getCtpvNm();
-        String sgg = welfareDTO.getSggNm();
+    public List<WelfareEntity> getAllWelfareByUserInfo(String userId){
+        UserEntity userEntity = userRepository.findById(userId).get();
+
+        LifeCycleEnum lifeCycle = userEntity.getLifeCycle();
+        FamilySituationEnum familySituation = userEntity.getFamilySituation();
+        String city = userEntity.getCtpvNm();
+        String sgg = userEntity.getSggNm();
 
         int[] indexList = {0,0,0,0,0};
 
@@ -75,5 +78,9 @@ public class WelfareService {
 
     public List<WelfareEntity> getAllWelfareByKeyword(String keyword){
         return welfareRepository.findAllByServNmContaining(keyword);
+    }
+
+    public List<WelfareEntity> getAllWelfare(){
+        return welfareRepository.findAll();
     }
 }
