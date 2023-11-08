@@ -72,4 +72,8 @@ public class WelfareService {
         return sortedWelfareList;
 
     }
+
+    public List<WelfareEntity> getAllWelfareByKeyword(String keyword){
+        return welfareRepository.findAllByServNmContaining(keyword);
+    }
 }

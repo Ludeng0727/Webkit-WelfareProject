@@ -36,6 +36,18 @@ public class WelfareController {
         }
     }
 
+    @GetMapping("/search/{keyword}")
+    public ResponseEntity<?> getAllWelfareByKeyword(@PathVariable String keyword){
+        try{
+            List<WelfareEntity> welfareList = welfareService.getAllWelfareByKeyword(keyword);
+            return ResponseEntity.ok(welfareList);
+
+        } catch (Exception e){
+            ResponseDTO<Object> responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
+            return ResponseEntity.badRequest().body(responseDTO);
+        }
+    }
+
 
 
 }
