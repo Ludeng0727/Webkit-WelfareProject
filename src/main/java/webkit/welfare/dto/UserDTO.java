@@ -9,7 +9,6 @@ import webkit.welfare.domain.LifeCycleEnum;
 import webkit.welfare.domain.UserEntity;
 
 import java.util.Date;
-import java.util.List;
 
 @Data
 @Builder

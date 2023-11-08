@@ -1,7 +1,6 @@
 package webkit.welfare.dto;
 
 import lombok.*;
-import webkit.welfare.domain.UserEntity;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;

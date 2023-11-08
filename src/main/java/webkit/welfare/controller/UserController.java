@@ -6,7 +6,6 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-import webkit.welfare.domain.LifeCycleEnum;
 import webkit.welfare.domain.UserEntity;
 import webkit.welfare.dto.AddUserRequest;
 import webkit.welfare.dto.ResponseDTO;
