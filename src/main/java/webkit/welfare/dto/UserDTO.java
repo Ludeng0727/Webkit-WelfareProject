@@ -1,5 +1,7 @@
 package webkit.welfare.dto;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,20 +12,31 @@ import webkit.welfare.domain.UserEntity;
 
 import java.util.Date;
 
+@ApiModel(description = "유저 정보 도메인")
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserDTO {
+    @ApiModelProperty(notes = "JWT 토큰")
     private String token;
+    @ApiModelProperty(notes = "식별자")
     private String id;
+    @ApiModelProperty(notes = "이름")
     private String username;
+    @ApiModelProperty(notes = "이메일")
     private String email;
+    @ApiModelProperty(notes = "비밀번호")
     private String password;
+    @ApiModelProperty(notes = "시도명")
     private String ctpvNm;
+    @ApiModelProperty(notes = "시군구명")
     private String sggNm;
+    @ApiModelProperty(notes = "생년월일")
     private Date birth;
+    @ApiModelProperty(notes = "생애주기")
     private String lifeCycle;
+    @ApiModelProperty(notes = "가구상황")
     private String familySituation;
 
     public static UserEntity toEntity(final UserDTO dto) {

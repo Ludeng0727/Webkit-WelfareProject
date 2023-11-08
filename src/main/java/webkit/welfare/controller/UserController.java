@@ -1,5 +1,7 @@
 package webkit.welfare.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -15,6 +17,7 @@ import webkit.welfare.service.UserService;
 
 import javax.validation.Valid;
 
+@Api(tags = {"유저 정보 관리"})
 @RestController
 @RequestMapping("auth")
 public class UserController {
@@ -28,6 +31,7 @@ public class UserController {
     final private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     // JWT 토큰을 사용한 회원 정보 검색
+    @ApiOperation(value = "회원 정보 가져오기", notes = "JWT 토큰을 사용하여 회원 정보를 가져옵니다.")
     @GetMapping("/getUser")
     public ResponseEntity<?> retrieveUser(@AuthenticationPrincipal String userId) {
         try{
@@ -41,6 +45,7 @@ public class UserController {
     }
 
     // 회원 정보 수정(비밀번호 변경)
+    @ApiOperation(value = "비밀번호 변경", notes = "로그인한 회원의 비밀번호를 변경합니다.")
     @PutMapping("/updatePassword")
     public ResponseEntity<?> updatePassword(@AuthenticationPrincipal String userId, @RequestBody UserDTO userDTO) {
         try{
@@ -59,6 +64,7 @@ public class UserController {
     }
     
     // 회원 정보 수정(비밀번호 외)
+    @ApiOperation(value = "회원 정보 변경", notes = "비밀번호를 제외한 회원 정보를 변경합니다.")
     @PutMapping("/updateUser")
     public ResponseEntity<?> updateUser(@AuthenticationPrincipal String userId, @RequestBody UserDTO userDTO) {
         try{
@@ -84,6 +90,7 @@ public class UserController {
     }
 
     // 회원가입
+    @ApiOperation(value = "회원 가입", notes = "회원 가입을 진행합니다.")
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@RequestBody @Valid AddUserRequest userDTO) {
         try{
@@ -126,6 +133,7 @@ public class UserController {
     }
 
     // 로그인
+    @ApiOperation(value = "로그인", notes = "로그인 성공 시 JWT 토큰을 발행합니다.")
     @PostMapping("/signin")
     public ResponseEntity<?> authenticate(@RequestBody UserDTO userDTO) {
         UserEntity user = userService.getByCredentials(userDTO.getEmail(), userDTO.getPassword(), passwordEncoder);
