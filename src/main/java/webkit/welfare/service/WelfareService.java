@@ -21,7 +21,6 @@ public class WelfareService {
     private final WelfareRepository welfareRepository;
 
     public List<WelfareEntity> getAllWelfareByWelfareDTO(WelfareDTO welfareDTO){
-        welfareDTO.getLifeCycle()
         LifeCycleEnum lifeCycle = welfareDTO.getLifeCycle();
         FamilySituationEnum familySituation = welfareDTO.getFamilySituation();
         String city = welfareDTO.getCtpvNm();
@@ -33,10 +32,10 @@ public class WelfareService {
         List<WelfareEntity> welfareList = welfareRepository.findAll();
         welfareList.forEach(welfare->{
             int count = 0;
-            if (welfare.getLifeNmArray() != null && welfare.getLifeNmArray().contains(lifeCycle.name())){
+            if (welfare.getLifeNmArray() != null && welfare.getLifeNmArray().contains(lifeCycle.getHangeul())){
                 count++;
             }
-            if (welfare.getTrgterIndvdlNmArray() != null && welfare.getTrgterIndvdlNmArray().contains(familySituation.name())){
+            if (welfare.getTrgterIndvdlNmArray() != null && welfare.getTrgterIndvdlNmArray().contains(familySituation.getHangeul())){
                 count++;
             }
             if (Objects.equals(city, welfare.getCtpvNm())){

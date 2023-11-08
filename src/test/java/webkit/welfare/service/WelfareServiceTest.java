@@ -20,7 +20,7 @@ class WelfareServiceTest {
 
     @Test
     void getAllWelfareByWelfareDTO() {
-        WelfareDTO welfareDTO = new WelfareDTO(LifeCycleEnum.노년, FamilySituationEnum.저소득, "경상북도", "구미시");
+        WelfareDTO welfareDTO = new WelfareDTO(LifeCycleEnum.OLD_AGE, FamilySituationEnum.LOW_INCOME, "경상북도", "구미시");
         List<WelfareEntity> all = welfareService.getAllWelfareByWelfareDTO(welfareDTO);
 
         all.forEach(welfare->{

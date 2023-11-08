@@ -95,15 +95,15 @@ public class UserService {
 
         // 계산된 만 나이로 생애 주기 판단
         if(age>=6 && age<=12) {
-            return LifeCycleEnum.아동;
+            return LifeCycleEnum.CHILD;
         } else if(age>=13 && age<=18) {
-            return LifeCycleEnum.청소년;
+            return LifeCycleEnum.TEEN;
         } else if(age>=19 && age<=29) {
-            return LifeCycleEnum.청년;
+            return LifeCycleEnum.YOUTH;
         } else if(age>=30 && age<=64) {
-            return LifeCycleEnum.중장년;
+            return LifeCycleEnum.MIDDLE_AGE;
         } else if(age>=65) {
-            return LifeCycleEnum.노년;
+            return LifeCycleEnum.OLD_AGE;
         }
 
         return null;
