@@ -37,7 +37,7 @@ public class WelfareScheduler {
     private final WelfareRepository welfareRepository;
     private final BookmarkRepository bookmarkRepository;
 
-    @Scheduled(cron = "0 0 4 * * *")
+    @Scheduled(cron = "0 30 13 * * *")
     public void updateWelfare() throws URISyntaxException, JsonProcessingException {
         String BASE_URL = "https://apis.data.go.kr/B554287/LocalGovernmentWelfareInformations";
         String API_PATH = "/LcgvWelfarelist";
