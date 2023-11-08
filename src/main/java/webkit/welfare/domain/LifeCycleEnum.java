@@ -14,7 +14,7 @@ public enum LifeCycleEnum {
         this.hangeul = hangeul;
     }
 
-    private String getHangeul(){
+    public String getHangeul(){
         return hangeul;
     }
 }

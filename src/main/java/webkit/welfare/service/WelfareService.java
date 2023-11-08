@@ -21,6 +21,7 @@ public class WelfareService {
     private final WelfareRepository welfareRepository;
 
     public List<WelfareEntity> getAllWelfareByWelfareDTO(WelfareDTO welfareDTO){
+        welfareDTO.getLifeCycle()
         LifeCycleEnum lifeCycle = welfareDTO.getLifeCycle();
         FamilySituationEnum familySituation = welfareDTO.getFamilySituation();
         String city = welfareDTO.getCtpvNm();
