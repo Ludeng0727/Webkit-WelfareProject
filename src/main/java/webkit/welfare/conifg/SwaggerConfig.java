@@ -14,8 +14,11 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.Collections;
+
+
 
 @Configuration
 @EnableSwagger2
@@ -30,33 +33,37 @@ public class SwaggerConfig {
                 .paths(PathSelectors.any()) // 위 패키지 안의 api 중 지정된 path만 보여줌. (any()로 설정 시 모든 api가 보여짐)
                 .build()
                 .securitySchemes(Collections.singletonList(apiKey()))
-                .securityContexts(Arrays.asList(securityContext(), securityContext2(), securityContext3()));
+                .securityContexts(Arrays.asList(AuthSecurityContext(),
+                        welfareSecurityContext(),
+                        bookmarkSecurityContext()));
     }
 
     private ApiKey apiKey() {
         return new ApiKey("Authorization", "Authorization", "header");
     }
 
-    private SecurityContext securityContext() {
+    private SecurityContext AuthSecurityContext() {
         return SecurityContext.builder()
                 .securityReferences(Collections.singletonList(new SecurityReference("Authorization", new AuthorizationScope[0])))
-                .forPaths(PathSelectors.ant("/auth/getUser"))
+                .forPaths(PathSelectors.regex("/auth.(getUser|updateUser|updatePassword)"))
                 .build();
     }
 
-    private SecurityContext securityContext2() {
+    private SecurityContext welfareSecurityContext() {
         return SecurityContext.builder()
                 .securityReferences(Collections.singletonList(new SecurityReference("Authorization", new AuthorizationScope[0])))
-                .forPaths(PathSelectors.ant("/auth/updateUser"))
+                .forPaths(PathSelectors.regex("/welfare.user"))
                 .build();
     }
 
-    private SecurityContext securityContext3() {
+    private SecurityContext bookmarkSecurityContext() {
         return SecurityContext.builder()
                 .securityReferences(Collections.singletonList(new SecurityReference("Authorization", new AuthorizationScope[0])))
-                .forPaths(PathSelectors.ant("/auth/updatePassword"))
+                .forPaths(PathSelectors.regex("/bookmark.*"))
                 .build();
     }
+
+
 
     public ApiInfo apiInfo() {
         return new ApiInfoBuilder()

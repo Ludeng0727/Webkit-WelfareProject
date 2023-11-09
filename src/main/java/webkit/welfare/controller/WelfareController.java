@@ -40,8 +40,6 @@ public class WelfareController {
 
     @ApiOperation(value = "사용자 정보를 이용한 맞춤 복지서비스 조회")
     @GetMapping("/user")
-    @ApiImplicitParam(name = "authorization", value = "Bearer + {JWT token}", required = true,
-            dataType = "string", paramType = "header")
     public ResponseEntity<?> getAllWelfareByUserInfo(@AuthenticationPrincipal @ApiIgnore String userId){
         try{
             List<WelfareEntity> allWelfare = welfareService.getAllWelfareByUserInfo(userId);
