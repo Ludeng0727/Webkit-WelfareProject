@@ -10,4 +10,6 @@ import java.util.List;
 public interface WelfareRepository extends JpaRepository<WelfareEntity, String> {
 
     List<WelfareEntity> findAllByServNmContaining(String keyword);
+
+    Boolean existsByServId(String servId);
 }
