@@ -1,5 +1,6 @@
 package webkit.welfare.controller;
 
+import io.swagger.annotations.ApiImplicitParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -20,6 +21,8 @@ public class BookmarkController {
 
 
     @PostMapping("/register")
+    @ApiImplicitParam(name = "authorization", value = "Bearer + {JWT token}", required = true,
+            dataType = "string", paramType = "header")
     public ResponseEntity<?> registerBookmark(@AuthenticationPrincipal @ApiIgnore String userId, @RequestParam String servId){
         try{
             BookmarkEntity bookmark = bookmarkService.registerBookmark(userId, servId);
