@@ -49,7 +49,7 @@ public class UserController {
     // 회원 정보 수정(비밀번호 변경)
     @ApiOperation(value = "비밀번호 변경", notes = "로그인한 회원의 비밀번호를 변경합니다.")
     @PutMapping("/updatePassword")
-    public ResponseEntity<?> updatePassword(@AuthenticationPrincipal String userId, @RequestBody LoginUserDTO userDTO) {
+    public ResponseEntity<?> updatePassword(@AuthenticationPrincipal @ApiIgnore String userId, @RequestBody LoginUserDTO userDTO) {
         try{
             // 유저 정보 검색 및 비밀번호 변경
             // 비밀번호에 암호화 과정이 존재하기 때문에 비밀번호 변경만 따로 제작

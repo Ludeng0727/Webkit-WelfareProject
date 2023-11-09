@@ -42,7 +42,7 @@ public class AddUserRequest {
     private final Date birth;
 
     @ApiModelProperty(notes = "가구상황")
-    @NotBlank
+    @NotNull
     private final FamilySituationEnum familySituation;
 
     public static UserDTO toUserDTO(final AddUserRequest dto) {
