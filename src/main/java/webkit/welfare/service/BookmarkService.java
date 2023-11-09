@@ -9,8 +9,7 @@ import webkit.welfare.repository.BookmarkRepository;
 import webkit.welfare.repository.UserRepository;
 import webkit.welfare.repository.WelfareRepository;
 
-import javax.persistence.EntityNotFoundException;
-import java.util.List;
+
 import java.util.Optional;
 
 @Service

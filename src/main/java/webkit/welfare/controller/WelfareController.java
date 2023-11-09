@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 import webkit.welfare.domain.WelfareEntity;
 import webkit.welfare.dto.ResponseDTO;
 import webkit.welfare.service.WelfareService;
@@ -39,7 +40,9 @@ public class WelfareController {
 
     @ApiOperation(value = "사용자 정보를 이용한 맞춤 복지서비스 조회")
     @GetMapping("/user")
-    public ResponseEntity<?> getAllWelfareByUserInfo(@AuthenticationPrincipal String userId){
+    @ApiImplicitParam(name = "authorization", value = "Bearer + {JWT token}", required = true,
+            dataType = "string", paramType = "header")
+    public ResponseEntity<?> getAllWelfareByUserInfo(@AuthenticationPrincipal @ApiIgnore String userId){
         try{
             List<WelfareEntity> allWelfare = welfareService.getAllWelfareByUserInfo(userId);
             return ResponseEntity.ok(allWelfare);

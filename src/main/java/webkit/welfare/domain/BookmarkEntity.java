@@ -33,6 +33,5 @@ public class BookmarkEntity {
 
     private String serviceName;
     // DB 갱신 후 해당 복지 정보가 존재하는지 식별
-    private String servId;
     private Boolean isValid;
 }
