@@ -10,6 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import webkit.welfare.domain.UserEntity;
 import webkit.welfare.dto.AddUserRequest;
+import webkit.welfare.dto.LoginUserDTO;
 import webkit.welfare.dto.ResponseDTO;
 import webkit.welfare.dto.UserDTO;
 import webkit.welfare.security.TokenProvider;
@@ -47,7 +48,7 @@ public class UserController {
     // 회원 정보 수정(비밀번호 변경)
     @ApiOperation(value = "비밀번호 변경", notes = "로그인한 회원의 비밀번호를 변경합니다.")
     @PutMapping("/updatePassword")
-    public ResponseEntity<?> updatePassword(@AuthenticationPrincipal String userId, @RequestBody UserDTO userDTO) {
+    public ResponseEntity<?> updatePassword(@AuthenticationPrincipal String userId, @RequestBody LoginUserDTO userDTO) {
         try{
             // 유저 정보 검색 및 비밀번호 변경
             // 비밀번호에 암호화 과정이 존재하기 때문에 비밀번호 변경만 따로 제작
@@ -135,7 +136,7 @@ public class UserController {
     // 로그인
     @ApiOperation(value = "로그인", notes = "로그인 성공 시 JWT 토큰을 발행합니다.")
     @PostMapping("/signin")
-    public ResponseEntity<?> authenticate(@RequestBody UserDTO userDTO) {
+    public ResponseEntity<?> authenticate(@RequestBody LoginUserDTO userDTO) {
         UserEntity user = userService.getByCredentials(userDTO.getEmail(), userDTO.getPassword(), passwordEncoder);
 
         if(user != null) {
