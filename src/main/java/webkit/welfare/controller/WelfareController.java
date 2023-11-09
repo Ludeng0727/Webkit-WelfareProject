@@ -19,7 +19,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/welfare")
 @RequiredArgsConstructor
-@Api(tags = "Welfare")
+@Api(tags = "복지 서비스 조회")
 public class WelfareController {
 
     private final WelfareService welfareService;
