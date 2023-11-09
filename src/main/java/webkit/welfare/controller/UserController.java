@@ -8,6 +8,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 import webkit.welfare.domain.UserEntity;
 import webkit.welfare.dto.AddUserRequest;
 import webkit.welfare.dto.LoginUserDTO;
@@ -34,7 +35,7 @@ public class UserController {
     // JWT 토큰을 사용한 회원 정보 검색
     @ApiOperation(value = "회원 정보 가져오기", notes = "JWT 토큰을 사용하여 회원 정보를 가져옵니다.")
     @GetMapping("/getUser")
-    public ResponseEntity<?> retrieveUser(@AuthenticationPrincipal String userId) {
+    public ResponseEntity<?> retrieveUser(@AuthenticationPrincipal @ApiIgnore String userId) {
         try{
             UserEntity user = userService.findById(userId);
             return ResponseEntity.ok().body(user);
@@ -67,7 +68,7 @@ public class UserController {
     // 회원 정보 수정(비밀번호 외)
     @ApiOperation(value = "회원 정보 변경", notes = "비밀번호를 제외한 회원 정보를 변경합니다.")
     @PutMapping("/updateUser")
-    public ResponseEntity<?> updateUser(@AuthenticationPrincipal String userId, @RequestBody UserDTO userDTO) {
+    public ResponseEntity<?> updateUser(@AuthenticationPrincipal @ApiIgnore String userId, @RequestBody UserDTO userDTO) {
         try{
             UserEntity user = UserDTO.toEntity(userDTO);
 

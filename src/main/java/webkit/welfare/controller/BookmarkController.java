@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 import webkit.welfare.domain.BookmarkEntity;
 import webkit.welfare.dto.ResponseDTO;
 import webkit.welfare.service.BookmarkService;
@@ -19,7 +20,7 @@ public class BookmarkController {
 
 
     @PostMapping("/register")
-    public ResponseEntity<?> registerBookmark(@AuthenticationPrincipal String userId, @RequestParam String servId){
+    public ResponseEntity<?> registerBookmark(@AuthenticationPrincipal @ApiIgnore String userId, @RequestParam String servId){
         try{
             BookmarkEntity bookmark = bookmarkService.registerBookmark(userId, servId);
             return ResponseEntity.ok(bookmark);
@@ -31,7 +32,7 @@ public class BookmarkController {
     }
 
     @DeleteMapping("/delete")
-    public ResponseEntity<?> deleteBookmark(@AuthenticationPrincipal String userId, @RequestParam String bookmarkId){
+    public ResponseEntity<?> deleteBookmark(@AuthenticationPrincipal @ApiIgnore String userId, @RequestParam String bookmarkId){
         try{
             bookmarkService.deleteBookmark(bookmarkId);
             return ResponseEntity.ok(null);

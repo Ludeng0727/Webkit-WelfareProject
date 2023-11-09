@@ -8,17 +8,16 @@ import webkit.welfare.domain.UserEntity;
 import webkit.welfare.domain.WelfareEntity;
 import webkit.welfare.repository.BookmarkRepository;
 
+import webkit.welfare.repository.UserRepository;
 import webkit.welfare.repository.WelfareRepository;
 
-import javax.persistence.EntityNotFoundException;
-import java.util.List;
+
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class BookmarkService {
 
-    @Autowired
     private final BookmarkRepository bookmarkRepository;
     private final UserRepository userRepository;
     private final WelfareRepository welfareRepository;
