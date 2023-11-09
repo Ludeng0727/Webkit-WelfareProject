@@ -34,26 +34,26 @@ public class SwaggerConfig {
     }
 
     private ApiKey apiKey() {
-        return new ApiKey("Authorization", "Bearer", "header");
+        return new ApiKey("Authorization", "Authorization", "header");
     }
 
     private SecurityContext securityContext() {
         return SecurityContext.builder()
-                .securityReferences(Collections.singletonList(new SecurityReference("Bearer Token", new AuthorizationScope[0])))
+                .securityReferences(Collections.singletonList(new SecurityReference("Authorization", new AuthorizationScope[0])))
                 .forPaths(PathSelectors.ant("/auth/getUser"))
                 .build();
     }
 
     private SecurityContext securityContext2() {
         return SecurityContext.builder()
-                .securityReferences(Collections.singletonList(new SecurityReference("Bearer Token", new AuthorizationScope[0])))
+                .securityReferences(Collections.singletonList(new SecurityReference("Authorization", new AuthorizationScope[0])))
                 .forPaths(PathSelectors.ant("/auth/updateUser"))
                 .build();
     }
 
     private SecurityContext securityContext3() {
         return SecurityContext.builder()
-                .securityReferences(Collections.singletonList(new SecurityReference("Bearer Token", new AuthorizationScope[0])))
+                .securityReferences(Collections.singletonList(new SecurityReference("Authorization", new AuthorizationScope[0])))
                 .forPaths(PathSelectors.ant("/auth/updatePassword"))
                 .build();
     }

@@ -18,6 +18,7 @@ import java.util.Objects;
 @Slf4j
 @RequiredArgsConstructor
 public class WelfareService {
+
     private final WelfareRepository welfareRepository;
     private final UserRepository userRepository;
 

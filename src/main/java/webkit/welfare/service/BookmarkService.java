@@ -1,13 +1,12 @@
 package webkit.welfare.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import webkit.welfare.domain.BookmarkEntity;
 import webkit.welfare.domain.UserEntity;
 import webkit.welfare.domain.WelfareEntity;
 import webkit.welfare.repository.BookmarkRepository;
-
+import webkit.welfare.repository.UserRepository;
 import webkit.welfare.repository.WelfareRepository;
 
 import javax.persistence.EntityNotFoundException;
@@ -18,7 +17,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class BookmarkService {
 
-    @Autowired
     private final BookmarkRepository bookmarkRepository;
     private final UserRepository userRepository;
     private final WelfareRepository welfareRepository;

@@ -53,6 +53,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         // 요청 정보 중 토큰 정보 가져오기 ("Baerer xxxxxx.....")
         String bearerToken = request.getHeader("Authorization");
 
+        if (StringUtils.hasText(bearerToken) && !bearerToken.startsWith("Bearer ")) {
+            bearerToken = "Bearer ".concat(bearerToken);
+        }
+
         // 가져온 토큰 정보 필터링 후 반환
         if(StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
             return bearerToken.substring(7);
